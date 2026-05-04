@@ -147,10 +147,20 @@ function StepRow({ step, idx, open, onToggle, onUpdate }) {
   );
 }
 
-function StepsTab({ steps, openId, setOpenId, onUpdate, people }) {
+function StepsTab({ steps, openId, setOpenId, onUpdate, onAdd, people }) {
+  const [adding, setAdding] = useState(false);
+  const [newName, setNewName] = useState('');
+  const [newSub, setNewSub] = useState('');
   const done = steps.filter(s => s.status === 'dn').length;
   const inProgress = steps.filter(s => s.status === 'il').length;
   const blocked = steps.filter(s => s.status === 'bl').length;
+
+  const handleAdd = () => {
+    if (!newName.trim()) return;
+    onAdd({ name: newName.trim(), sub: newSub.trim() });
+    setNewName(''); setNewSub(''); setAdding(false);
+  };
+
   return (
     <div>
       <div style={{ marginBottom: 14 }}>
@@ -167,6 +177,25 @@ function StepsTab({ steps, openId, setOpenId, onUpdate, people }) {
           onToggle={() => setOpenId(openId === s.id ? null : s.id)}
           onUpdate={patch => onUpdate(s.id, patch)} />
       ))}
+      {adding ? (
+        <div style={{ border: `1px solid ${BK}`, borderRadius: 10, padding: 13, marginTop: 6, background: '#FAFAFA' }}>
+          <input autoFocus value={newName} onChange={e => setNewName(e.target.value)}
+            onKeyDown={e => e.key === 'Enter' && handleAdd()}
+            placeholder="Numele categoriei..." style={{ ...inpS, marginBottom: 8, fontSize: 13 }} />
+          <input value={newSub} onChange={e => setNewSub(e.target.value)}
+            onKeyDown={e => e.key === 'Enter' && handleAdd()}
+            placeholder="Subtitlu (opțional)..." style={{ ...inpS, marginBottom: 10, fontSize: 12 }} />
+          <div style={{ display: 'flex', gap: 6, justifyContent: 'flex-end' }}>
+            <button onClick={() => { setAdding(false); setNewName(''); setNewSub(''); }} style={{ padding: '5px 14px', borderRadius: 99, border: `1px solid ${BR}`, background: WH, color: GR, cursor: 'pointer', fontSize: 11, fontFamily: 'inherit' }}>Anulează</button>
+            <button onClick={handleAdd} disabled={!newName.trim()} style={{ padding: '5px 14px', borderRadius: 99, border: 'none', background: newName.trim() ? BK : '#ccc', color: WH, cursor: newName.trim() ? 'pointer' : 'not-allowed', fontSize: 11, fontWeight: 600, fontFamily: 'inherit' }}>Adaugă</button>
+          </div>
+        </div>
+      ) : (
+        <button onClick={() => setAdding(true)} style={{ width: '100%', marginTop: 6, padding: '8px 0', borderRadius: 10, border: `1px dashed ${BR}`, background: 'transparent', color: GR, cursor: 'pointer', fontSize: 12, fontFamily: 'inherit', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5 }}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Adaugă categorie
+        </button>
+      )}
     </div>
   );
 }
@@ -508,6 +537,13 @@ export default function App() {
     await sbUpsert('hub_people', { id: uid(), name: n, sort_order: people.length });
   };
 
+  const addStep = async ({ name, sub }) => {
+    const id = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') + '-' + uid();
+    const newStep = { id, name, sub, status: 'ns', notes: '', sort_order: steps.length };
+    setSteps(p => [...p, newStep]);
+    await sbUpsert('hub_steps', { id, name, sub, status: 'ns', description: '', sort_order: steps.length, updated_at: new Date().toISOString() });
+  };
+
   const openCount = todos.filter(t => !t.done).length;
 
   return (
@@ -554,7 +590,7 @@ export default function App() {
       <div style={{ padding: 16, maxWidth: 740, margin: '0 auto' }}>
         {error && <div style={{ marginBottom: 12, padding: '10px 14px', background: '#FEE8E8', border: '1px solid #F5C6C6', borderRadius: 8, fontSize: 12, color: '#C0392B' }}>⚠ {error}</div>}
         {!loaded && <div style={{ textAlign: 'center', color: GR, padding: '60px 0', fontSize: 13 }}>Se încarcă...</div>}
-        {loaded && tab === 'steps' && <StepsTab steps={steps} openId={openStep} setOpenId={setOpenStep} onUpdate={updStep} people={people} />}
+        {loaded && tab === 'steps' && <StepsTab steps={steps} openId={openStep} setOpenId={setOpenStep} onUpdate={updStep} onAdd={addStep} people={people} />}
         {loaded && tab === 'todos' && <TodosTab todos={todos} onAdd={addTodo} onToggle={toggleTodo} onDelete={deleteTodo} steps={steps} people={people} />}
         {loaded && tab === 'minutes' && <MinutesTab minutes={minutes} onAdd={addMinute} onDelete={deleteMinute} steps={steps} people={people} />}
       </div>
