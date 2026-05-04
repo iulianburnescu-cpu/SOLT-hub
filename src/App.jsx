@@ -165,7 +165,7 @@ function StepsTab({ steps, openId, setOpenId, onUpdate, onAdd, people }) {
     <div>
       <div style={{ marginBottom: 14 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
-          <span style={{ fontSize: 11, color: GR }}>{done}/{steps.length} pași finalizați</span>
+          <span style={{ fontSize: 11, color: GR }}>{done}/{steps.length} categorii finalizate</span>
           <span style={{ fontSize: 11, color: GR }}>{inProgress} în lucru · <span style={{ color: blocked > 0 ? '#C0392B' : GR }}>{blocked} blocate</span></span>
         </div>
         <div style={{ height: 4, background: BR, borderRadius: 2, overflow: 'hidden' }}>
@@ -240,7 +240,7 @@ function TodoForm({ steps, people, onSave, onCancel }) {
           {people.map(p => <option key={p} value={p}>{p}</option>)}
         </select>
         <select value={t.stepId} onChange={e => setT(p => ({ ...p, stepId: e.target.value }))} style={{ ...inpS, height: 32, padding: '4px 8px' }}>
-          <option value="">Pas (opțional)</option>
+          <option value="">Categorie (opțional)</option>
           {steps.map(s => <option key={s.id} value={s.id}>{s.name}</option>)}
         </select>
       </div>
@@ -369,7 +369,7 @@ function MinuteForm({ steps, people, onSave, onCancel }) {
         </div>
       </div>
       <div style={{ marginBottom: 10 }}>
-        <Lbl>Pași discutați</Lbl>
+        <Lbl>Categorii discutate</Lbl>
         <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap', marginTop: 4 }}>
           {steps.map(s => (
             <button key={s.id} onClick={() => tog('stepIds', s.id)} style={{
@@ -463,7 +463,7 @@ export default function App() {
         if (Array.isArray(s) && s.length) {
           setSteps(s.map(x => ({ ...x, notes: x.description || '' })));
         } else {
-          setError('Pașii nu au putut fi încărcați: ' + JSON.stringify(s));
+          setError('Categoriile nu au putut fi încărcate: ' + JSON.stringify(s));
           setSteps(STEPS_DEF.map(s => ({ ...s, notes: '', status: 'ns' })));
         }
         if (Array.isArray(t)) setTodos(t.map(x => ({ ...x, stepId: x.step_id, dueDate: x.due_date })));
@@ -559,7 +559,7 @@ export default function App() {
         </div>
         <div style={{ width: 1, height: 18, background: BR }} />
         <div style={{ display: 'flex', gap: 2 }}>
-          {[['steps', 'Pași'], ['todos', openCount > 0 ? `To-dos (${openCount})` : 'To-dos'], ['minutes', 'Minute']].map(([id, l]) => (
+          {[['steps', 'Categorii'], ['todos', openCount > 0 ? `To-dos (${openCount})` : 'To-dos'], ['minutes', 'Minute']].map(([id, l]) => (
             <button key={id} onClick={() => setTab(id)} style={{
               padding: '3px 11px', borderRadius: 99, border: 'none', cursor: 'pointer', fontSize: 11,
               fontWeight: tab === id ? 600 : 400, background: tab === id ? BK : WH,
