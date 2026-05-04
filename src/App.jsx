@@ -34,7 +34,13 @@ async function sbUpsert(table, data) {
     body: JSON.stringify(data),
   });
 }
-async function sbDelete(table, id) {
+async function sbPatch(table, id, data) {
+  await fetch(`${SB_URL}/rest/v1/${table}?id=eq.${id}`, {
+    method: 'PATCH',
+    headers: { ...sbH, 'Prefer': 'return=minimal' },
+    body: JSON.stringify(data),
+  });
+}
   await fetch(`${SB_URL}/rest/v1/${table}?id=eq.${id}`, { method: 'DELETE', headers: sbH });
 }
 
@@ -446,9 +452,10 @@ export default function App() {
   const updStep = async (id, patch) => {
     setSteps(p => p.map(s => s.id === id ? { ...s, ...patch } : s));
     setSaved(false);
-    const sbPatch = { ...patch, updated_at: new Date().toISOString() };
-    if (patch.notes !== undefined) { sbPatch.description = patch.notes; delete sbPatch.notes; }
-    await sbUpsert('hub_steps', { id, ...sbPatch });
+    const sbPatch2 = { ...patch, updated_at: new Date().toISOString() };
+    if (patch.notes !== undefined) { sbPatch2.description = patch.notes; delete sbPatch2.notes; }
+    delete sbPatch2._editing;
+    await sbPatch('hub_steps', id, sbPatch2);
     setSaved(true);
   };
 
@@ -469,7 +476,7 @@ export default function App() {
     const todo = todos.find(t => t.id === id);
     const done = !todo.done;
     setTodos(p => p.map(t => t.id === id ? { ...t, done } : t));
-    await sbUpsert('hub_todos', { id, done, updated_at: new Date().toISOString() });
+    await sbPatch('hub_todos', id, { done, updated_at: new Date().toISOString() });
   };
   const deleteTodo = async (id) => {
     setTodos(p => p.filter(t => t.id !== id));
