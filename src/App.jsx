@@ -143,7 +143,7 @@ function StepsTab({ steps, openId, setOpenId, onUpdate, onAdd, onDelete }) {
     <div>
       <div style={{ marginBottom: 20 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
-          <span style={{ fontSize: 12, color: TX2, fontFamily: "'JetBrains Mono', monospace" }}>{done}/{steps.length} categorii finalizate</span>
+          <span style={{ fontSize: 12, color: '#5C5C5C', fontFamily: "'JetBrains Mono', monospace" }}>{done}/{steps.length} categorii finalizate</span>
           <span style={{ fontSize: 12, fontFamily: "'JetBrains Mono', monospace" }}>
             <span style={{ color: YL }}>{inProgress} în lucru</span><span style={{ color: TX3 }}> · </span><span style={{ color: blocked > 0 ? RD : TX3 }}>{blocked} blocate</span>
           </span>
@@ -465,27 +465,27 @@ export default function App() {
     <>
       <style>{css}</style>
       <div style={{ fontFamily: "'Syne', sans-serif", background: BG, color: TX, minHeight: '100vh', position: 'relative' }}>
-        <div style={{ position: 'sticky', top: 0, zIndex: 100, background: 'rgba(10,10,15,.92)', backdropFilter: 'blur(12px)', borderBottom: `1px solid ${BD}`, padding: '0 20px', display: 'flex', alignItems: 'center', gap: 12, height: 52 }}>
+        <div style={{ position: 'sticky', top: 0, zIndex: 100, background: '#ffffff', borderBottom: `1px solid ${BD}`, padding: '0 20px', display: 'flex', alignItems: 'center', gap: 12, height: 52 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <div style={{ width: 28, height: 28, borderRadius: 7, background: `linear-gradient(135deg, ${PD}, #9c27b0)`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: '0 0 12px rgba(94,53,177,.5)' }}>
+            <div style={{ width: 28, height: 28, borderRadius: 7, background: `linear-gradient(135deg, ${PD}, #9c27b0)`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: '0 2px 8px rgba(94,53,177,.3)' }}>
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" /></svg>
             </div>
-            <span style={{ fontWeight: 800, fontSize: 15, letterSpacing: '-.5px', color: TX }}>SOLT <span style={{ color: P }}>Hub</span></span>
+            <span style={{ fontWeight: 800, fontSize: 15, letterSpacing: '-.5px', color: '#161616' }}>SOLT <span style={{ color: '#5e35b1' }}>Hub</span></span>
           </div>
           <div style={{ width: 1, height: 20, background: BD }} />
           <div style={{ display: 'flex', gap: 2 }}>
             {[['steps','Categorii'],['todos', openCount > 0 ? `To-dos (${openCount})` : 'To-dos'],['minutes','Minute']].map(([id,l]) => (
-              <button key={id} onClick={() => setTab(id)} style={{ padding: '4px 12px', borderRadius: 7, border: 'none', cursor: 'pointer', fontSize: 13, fontWeight: tab===id ? 700 : 400, background: tab===id ? 'rgba(124,92,191,.2)' : 'transparent', color: tab===id ? P : TX2, fontFamily: 'inherit', transition: 'all .15s' }}>{l}</button>
+              <button key={id} onClick={() => setTab(id)} style={{ padding: '4px 12px', borderRadius: 7, border: 'none', cursor: 'pointer', fontSize: 13, fontWeight: tab===id ? 700 : 400, background: tab===id ? 'rgba(94,53,177,.1)' : 'transparent', color: tab===id ? '#5e35b1' : '#5C5C5C', fontFamily: 'inherit', transition: 'all .15s' }}>{l}</button>
             ))}
           </div>
           <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 10, position: 'relative' }}>
             {loaded && (
-              <span style={{ fontSize: 11, color: saved ? G : TX3, display: 'flex', alignItems: 'center', gap: 4, fontFamily: "'JetBrains Mono', monospace" }}>
+              <span style={{ fontSize: 11, color: saved ? '#0A6640' : '#AAAAAA', display: 'flex', alignItems: 'center', gap: 4, fontFamily: "'JetBrains Mono', monospace" }}>
                 <div style={{ width: 5, height: 5, borderRadius: '50%', background: saved ? G : TX3, boxShadow: saved ? `0 0 6px ${G}` : 'none' }} />
                 {saved ? 'salvat' : 'salvare...'}
               </span>
             )}
-            <button onClick={() => setShowTeam(v => !v)} style={{ display: 'flex', alignItems: 'center', gap: 5, padding: '4px 10px', borderRadius: 7, border: `1px solid ${showTeam ? BDA : BD}`, background: showTeam ? 'rgba(94,53,177,.2)' : 'transparent', color: showTeam ? P : TX2, cursor: 'pointer', fontSize: 13, fontFamily: 'inherit', transition: 'all .15s' }}>
+            <button onClick={() => setShowTeam(v => !v)} style={{ display: 'flex', alignItems: 'center', gap: 5, padding: '4px 10px', borderRadius: 7, border: `1px solid ${showTeam ? BDA : BD}`, background: showTeam ? 'rgba(94,53,177,.2)' : 'transparent', color: showTeam ? '#5e35b1' : '#5C5C5C', cursor: 'pointer', fontSize: 13, fontFamily: 'inherit', transition: 'all .15s' }}>
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"><circle cx="9" cy="7" r="4" /><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" /><path d="M16 3.13a4 4 0 0 1 0 7.75M21 21v-2a4 4 0 0 0-3-3.85" /></svg>
               Echipă
             </button>
