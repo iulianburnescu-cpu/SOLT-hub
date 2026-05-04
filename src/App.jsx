@@ -114,9 +114,26 @@ function StepRow({ step, idx, open, onToggle, onUpdate }) {
           </div>
           <div>
             <Lbl>Descriere</Lbl>
-            <textarea value={step.notes || ''} onChange={e => onUpdate({ notes: e.target.value })}
-              placeholder="Context, decizii, linkuri, observații..." rows={5}
-              style={{ ...inpS, resize: 'vertical' }} />
+            {step._editing ? (
+              <textarea
+                autoFocus
+                value={step.notes || ''}
+                onChange={e => onUpdate({ notes: e.target.value })}
+                onBlur={() => onUpdate({ _editing: false })}
+                placeholder="Context, decizii, linkuri, observații..."
+                style={{ ...inpS, resize: 'none', overflow: 'hidden', minHeight: 60,
+                  height: 'auto', display: 'block' }}
+                ref={el => { if (el) { el.style.height = 'auto'; el.style.height = el.scrollHeight + 'px'; } }}
+              />
+            ) : (
+              <div onClick={() => onUpdate({ _editing: true })} style={{
+                fontSize: 13, lineHeight: 1.8, color: step.notes ? BK : GR,
+                whiteSpace: 'pre-wrap', padding: '8px 10px', borderRadius: 8,
+                border: `1px solid ${BR}`, background: WH, cursor: 'text', minHeight: 44,
+              }}>
+                {step.notes || 'Click pentru a edita...'}
+              </div>
+            )}
           </div>
         </div>
       )}
