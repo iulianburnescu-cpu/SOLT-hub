@@ -122,16 +122,21 @@ function StepRow({ step, idx, open, onToggle, onUpdate }) {
           <div>
             <Lbl>Descriere</Lbl>
             {step._editing ? (
-              <textarea
-                autoFocus
-                value={step.notes || ''}
-                onChange={e => onUpdate({ notes: e.target.value })}
-                onBlur={() => onUpdate({ _editing: false })}
-                placeholder="Context, decizii, linkuri, observații..."
-                style={{ ...inpS, resize: 'none', overflow: 'hidden', minHeight: 60,
-                  height: 'auto', display: 'block' }}
-                ref={el => { if (el) { el.style.height = 'auto'; el.style.height = el.scrollHeight + 'px'; } }}
-              />
+              <div>
+                <textarea
+                  autoFocus
+                  value={step.notes || ''}
+                  onChange={e => onUpdate({ notes: e.target.value })}
+                  placeholder="Context, decizii, linkuri, observații..."
+                  style={{ ...inpS, resize: 'none', overflow: 'hidden', minHeight: 60,
+                    height: 'auto', display: 'block', borderBottomLeftRadius: 0, borderBottomRightRadius: 0, borderBottom: 'none' }}
+                  ref={el => { if (el) { el.style.height = 'auto'; el.style.height = el.scrollHeight + 'px'; } }}
+                />
+                <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 6, padding: '6px 8px', background: '#f9f5ff', border: `1px solid ${BR}`, borderTop: `1px solid #e8d8fc`, borderBottomLeftRadius: 8, borderBottomRightRadius: 8 }}>
+                  <button onClick={() => onUpdate({ _editing: false })} style={{ padding: '4px 12px', borderRadius: 99, border: `1px solid ${BR}`, background: WH, color: GR, cursor: 'pointer', fontSize: 11, fontFamily: 'inherit' }}>Anulează</button>
+                  <button onClick={() => onUpdate({ _editing: false })} style={{ padding: '4px 12px', borderRadius: 99, border: 'none', background: Y, color: WH, cursor: 'pointer', fontSize: 11, fontWeight: 600, fontFamily: 'inherit' }}>Salvează</button>
+                </div>
+              </div>
             ) : (
               <div onClick={() => onUpdate({ _editing: true })} style={{
                 fontSize: 13, lineHeight: 1.8, color: step.notes ? BK : GR,
