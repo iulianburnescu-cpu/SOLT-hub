@@ -15,10 +15,10 @@ const RD   = '#e74c3c';
 const YL   = '#f0c000';
 
 const STATUS = {
-  ns: { l: 'Neînceput', bg: 'transparent', c: TX2, dot: TX3, border: BD },
-  il: { l: 'În lucru', bg: 'rgba(240,192,0,.08)', c: '#f0c000', dot: '#f0c000', border: 'rgba(240,192,0,.3)' },
-  bl: { l: 'Blocat', bg: 'rgba(231,76,60,.08)', c: '#e74c3c', dot: '#e74c3c', border: 'rgba(231,76,60,.3)' },
-  dn: { l: 'Finalizat', bg: 'rgba(46,204,136,.08)', c: '#2ecc88', dot: '#2ecc88', border: 'rgba(46,204,136,.3)' },
+  ns: { l: 'Neînceput', bg: '#F7F7F7', c: '#888', dot: '#D0D0D0', border: '#E4E4E4', accent: '#E4E4E4' },
+  il: { l: 'În lucru',  bg: '#FFFBE6', c: '#92620A', dot: '#f0c000', border: '#F5D060', accent: '#f0c000' },
+  bl: { l: 'Blocat',    bg: '#FEF0EE', c: '#C0392B', dot: '#e74c3c', border: '#F5B8B2', accent: '#e74c3c' },
+  dn: { l: 'Finalizat', bg: '#E8FAF2', c: '#0A6640', dot: '#2ecc88', border: '#7ADBB4', accent: '#2ecc88' },
 };
 
 const STEPS_DEF = [
@@ -85,10 +85,10 @@ function Btn({ children, onClick, ghost, disabled, sm }) {
 function StepRow({ step, idx, open, onToggle, onUpdate, onDelete }) {
   const st = STATUS[step.status] || STATUS.ns;
   return (
-    <div style={{ border: `1px solid ${open ? BDA : BD}`, borderRadius: 10, overflow: 'hidden', marginBottom: 4, background: open ? S2 : S1, boxShadow: open ? '0 0 0 1px rgba(94,53,177,.2), 0 4px 20px rgba(0,0,0,.3)' : 'none', transition: 'all .2s' }}>
+    <div style={{ border: `1px solid ${open ? BDA : BD}`, borderLeft: `3px solid ${(STATUS[step.status]||STATUS.ns).accent}`, borderRadius: 10, overflow: 'hidden', marginBottom: 4, background: open ? S2 : S1, boxShadow: open ? '0 2px 12px rgba(94,53,177,.12)' : 'none', transition: 'all .2s' }}>
       <div onClick={onToggle} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '11px 14px', cursor: 'pointer', userSelect: 'none' }}>
-        <div style={{ width: 24, height: 24, borderRadius: 6, flexShrink: 0, background: open ? PD : 'transparent', border: `1px solid ${open ? PD : BD}`, display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all .15s' }}>
-          <span style={{ fontSize: 11, fontWeight: 700, color: open ? 'white' : TX3, fontFamily: "'JetBrains Mono', monospace" }}>{String(idx+1).padStart(2,'0')}</span>
+        <div style={{ width: 24, height: 24, borderRadius: 6, flexShrink: 0, background: open ? PD : 'rgba(94,53,177,.08)', border: `1px solid ${open ? PD : 'rgba(94,53,177,.25)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all .15s' }}>
+          <span style={{ fontSize: 11, fontWeight: 700, color: open ? 'white' : '#5e35b1', fontFamily: "'JetBrains Mono', monospace" }}>{String(idx+1).padStart(2,'0')}</span>
         </div>
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ fontWeight: 700, fontSize: 15, color: TX, lineHeight: 1.2 }}>{step.name}</div>
@@ -149,7 +149,7 @@ function StepsTab({ steps, openId, setOpenId, onUpdate, onAdd, onDelete }) {
           </span>
         </div>
         <div style={{ height: 2, background: BD, borderRadius: 1, overflow: 'hidden' }}>
-          <div style={{ height: '100%', background: `linear-gradient(90deg, ${PD}, ${P})`, width: `${pct}%`, transition: 'width .5s', borderRadius: 1, boxShadow: `0 0 8px ${P}` }} />
+          <div style={{ height: '100%', background: `linear-gradient(90deg, ${PD}, ${P})`, width: `${pct}%`, transition: 'width .5s', borderRadius: 1, boxShadow: '0 1px 4px rgba(94,53,177,.4)' }} />
         </div>
       </div>
       {steps.map((s, i) => (
@@ -165,7 +165,7 @@ function StepsTab({ steps, openId, setOpenId, onUpdate, onAdd, onDelete }) {
           </div>
         </div>
       ) : (
-        <button onClick={() => setAdding(true)} style={{ width: '100%', marginTop: 6, padding: '10px 0', borderRadius: 10, border: `1px dashed ${BD}`, background: 'transparent', color: TX3, cursor: 'pointer', fontSize: 13, fontFamily: 'inherit', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, transition: 'all .15s' }} onMouseEnter={e => { e.currentTarget.style.borderColor=P; e.currentTarget.style.color=P; }} onMouseLeave={e => { e.currentTarget.style.borderColor=BD; e.currentTarget.style.color=TX3; }}>
+        <button onClick={() => setAdding(true)} style={{ width: '100%', marginTop: 6, padding: '10px 0', borderRadius: 10, border: `1px dashed ${BD}`, background: 'transparent', color: TX3, cursor: 'pointer', fontSize: 13, fontFamily: 'inherit', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, transition: 'all .15s' }} onMouseEnter={e => { e.currentTarget.style.borderColor='#5e35b1'; e.currentTarget.style.color='#5e35b1'; e.currentTarget.style.background='rgba(94,53,177,.04)'; }} onMouseLeave={e => { e.currentTarget.style.borderColor='#E4E4E4'; e.currentTarget.style.color='#AAAAAA'; e.currentTarget.style.background='transparent'; }}>
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           Adaugă categorie
         </button>
@@ -294,7 +294,7 @@ function MinuteCard({ minute, steps, onDelete }) {
               <Lbl>Decizii luate</Lbl>
               {decisions.map((dec, i) => (
                 <div key={i} style={{ display: 'flex', gap: 8, alignItems: 'flex-start', marginBottom: 5 }}>
-                  <div style={{ width: 6, height: 6, borderRadius: '50%', background: G, marginTop: 6, flexShrink: 0, boxShadow: `0 0 6px ${G}` }} />
+                  <div style={{ width: 6, height: 6, borderRadius: '50%', background: G, marginTop: 6, flexShrink: 0, boxShadow: '0 0 0 2px rgba(46,204,136,.2)' }} />
                   <div style={{ fontSize: 14, lineHeight: 1.6, color: TX }}>{dec}</div>
                 </div>
               ))}
@@ -305,7 +305,7 @@ function MinuteCard({ minute, steps, onDelete }) {
               <Lbl>Acțiuni follow-up</Lbl>
               {actions.map((act, i) => (
                 <div key={i} style={{ display: 'flex', gap: 8, alignItems: 'flex-start', marginBottom: 5 }}>
-                  <div style={{ width: 6, height: 6, borderRadius: 2, background: YL, marginTop: 6, flexShrink: 0, boxShadow: `0 0 6px ${YL}` }} />
+                  <div style={{ width: 6, height: 6, borderRadius: 2, background: YL, marginTop: 6, flexShrink: 0, boxShadow: '0 0 0 2px rgba(240,192,0,.2)' }} />
                   <div style={{ fontSize: 14, lineHeight: 1.6, color: TX }}>{act}</div>
                 </div>
               ))}
@@ -465,7 +465,7 @@ export default function App() {
     <>
       <style>{css}</style>
       <div style={{ fontFamily: "'Syne', sans-serif", background: BG, color: TX, minHeight: '100vh', position: 'relative' }}>
-        <div style={{ position: 'sticky', top: 0, zIndex: 100, background: '#ffffff', borderBottom: `1px solid ${BD}`, padding: '0 20px', display: 'flex', alignItems: 'center', gap: 12, height: 52 }}>
+        <div style={{ position: 'sticky', top: 0, zIndex: 100, background: '#ffffff', borderBottom: `1px solid ${BD}`, borderTop: '3px solid #5e35b1', padding: '0 20px', display: 'flex', alignItems: 'center', gap: 12, height: 52 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
             <div style={{ width: 28, height: 28, borderRadius: 7, background: `linear-gradient(135deg, ${PD}, #9c27b0)`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: '0 2px 8px rgba(94,53,177,.3)' }}>
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" /></svg>
