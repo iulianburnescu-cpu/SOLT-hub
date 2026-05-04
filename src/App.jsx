@@ -66,15 +66,15 @@ function fmtDate(s) {
 
 const inpS = {
   width: '100%', padding: '7px 10px', borderRadius: 8, border: `1px solid ${BR}`,
-  fontSize: 12, fontFamily: 'inherit', color: BK, background: WH, outline: 'none', boxSizing: 'border-box',
+  fontSize: 13, fontFamily: 'inherit', color: BK, background: WH, outline: 'none', boxSizing: 'border-box',
 };
 
 function Lbl({ children }) {
-  return <div style={{ fontSize: 10, fontWeight: 600, color: GR, marginBottom: 4, textTransform: 'uppercase', letterSpacing: .5 }}>{children}</div>;
+  return <div style={{ fontSize: 11, fontWeight: 600, color: GR, marginBottom: 4, textTransform: 'uppercase', letterSpacing: .5 }}>{children}</div>;
 }
 
 function Tag({ children, yellow }) {
-  return <span style={{ fontSize: 10, padding: '2px 8px', borderRadius: 99, background: yellow ? '#FFF9CC' : BG, border: `1px solid ${BR}`, color: yellow ? '#7A6000' : GR, whiteSpace: 'nowrap' }}>{children}</span>;
+  return <span style={{ fontSize: 11, padding: '2px 8px', borderRadius: 99, background: yellow ? '#FFF9CC' : BG, border: `1px solid ${BR}`, color: yellow ? '#7A6000' : GR, whiteSpace: 'nowrap' }}>{children}</span>;
 }
 
 function Btn({ children, onClick, ghost, disabled }) {
@@ -82,7 +82,7 @@ function Btn({ children, onClick, ghost, disabled }) {
     <button onClick={onClick} disabled={disabled} style={{
       padding: '5px 14px', borderRadius: 99, border: `1px solid ${ghost ? BR : 'transparent'}`,
       background: ghost ? WH : disabled ? '#ccc' : BK, color: ghost ? GR : WH,
-      cursor: disabled ? 'not-allowed' : 'pointer', fontSize: 11, fontWeight: 600, fontFamily: 'inherit',
+      cursor: disabled ? 'not-allowed' : 'pointer', fontSize: 12, fontWeight: 600, fontFamily: 'inherit',
     }}>{children}</button>
   );
 }
@@ -93,14 +93,14 @@ function StepRow({ step, idx, open, onToggle, onUpdate }) {
     <div style={{ border: `1px solid ${open ? BK : BR}`, borderRadius: 10, overflow: 'hidden', marginBottom: 5, background: WH, transition: 'border-color .15s' }}>
       <div onClick={onToggle} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '9px 13px', cursor: 'pointer', userSelect: 'none' }}>
         <div style={{ width: 22, height: 22, borderRadius: 6, background: open ? Y : BG, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, transition: 'background .15s' }}>
-          <span style={{ fontSize: 10, fontWeight: 700, color: open ? WH : GR }}>{idx + 1}</span>
+          <span style={{ fontSize: 11, fontWeight: 700, color: open ? WH : GR }}>{idx + 1}</span>
         </div>
         <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={{ fontWeight: 600, fontSize: 13, lineHeight: 1.1 }}>{step.name}</div>
-          {step.sub && <div style={{ fontSize: 11, color: GR, marginTop: 1 }}>{step.sub}</div>}
+          <div style={{ fontWeight: 600, fontSize: 14, lineHeight: 1.1 }}>{step.name}</div>
+          {step.sub && <div style={{ fontSize: 12, color: GR, marginTop: 1 }}>{step.sub}</div>}
         </div>
         <div style={{ width: 7, height: 7, borderRadius: '50%', background: st.dot, flexShrink: 0 }} />
-        <span style={{ fontSize: 10, padding: '2px 8px', borderRadius: 99, background: st.bg, color: st.c, border: `1px solid ${BR}`, whiteSpace: 'nowrap', flexShrink: 0 }}>{st.l}</span>
+        <span style={{ fontSize: 11, padding: '2px 8px', borderRadius: 99, background: st.bg, color: st.c, border: `1px solid ${BR}`, whiteSpace: 'nowrap', flexShrink: 0 }}>{st.l}</span>
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke={GR} strokeWidth="2" strokeLinecap="round" style={{ transform: open ? 'rotate(180deg)' : 'none', transition: 'transform .2s', flexShrink: 0 }}>
           <polyline points="6 9 12 15 18 9" />
         </svg>
@@ -112,7 +112,7 @@ function StepRow({ step, idx, open, onToggle, onUpdate }) {
             <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginTop: 4 }}>
               {Object.entries(STATUS).map(([k, v]) => (
                 <button key={k} onClick={() => onUpdate({ status: k })} style={{
-                  padding: '3px 9px', borderRadius: 99, border: `1px solid ${BR}`, cursor: 'pointer', fontSize: 10,
+                  padding: '3px 9px', borderRadius: 99, border: `1px solid ${BR}`, cursor: 'pointer', fontSize: 11,
                   background: step.status === k ? BK : v.bg, color: step.status === k ? WH : v.c,
                   fontWeight: step.status === k ? 600 : 400, fontFamily: 'inherit',
                 }}>{v.l}</button>
@@ -133,13 +133,13 @@ function StepRow({ step, idx, open, onToggle, onUpdate }) {
                   ref={el => { if (el) { el.style.height = 'auto'; el.style.height = el.scrollHeight + 'px'; } }}
                 />
                 <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 6, padding: '6px 8px', background: '#f9f5ff', border: `1px solid ${BR}`, borderTop: `1px solid #e8d8fc`, borderBottomLeftRadius: 8, borderBottomRightRadius: 8 }}>
-                  <button onClick={() => onUpdate({ _editing: false })} style={{ padding: '4px 12px', borderRadius: 99, border: `1px solid ${BR}`, background: WH, color: GR, cursor: 'pointer', fontSize: 11, fontFamily: 'inherit' }}>Anulează</button>
-                  <button onClick={() => onUpdate({ _editing: false })} style={{ padding: '4px 12px', borderRadius: 99, border: 'none', background: Y, color: WH, cursor: 'pointer', fontSize: 11, fontWeight: 600, fontFamily: 'inherit' }}>Salvează</button>
+                  <button onClick={() => onUpdate({ _editing: false })} style={{ padding: '4px 12px', borderRadius: 99, border: `1px solid ${BR}`, background: WH, color: GR, cursor: 'pointer', fontSize: 12, fontFamily: 'inherit' }}>Anulează</button>
+                  <button onClick={() => onUpdate({ _editing: false })} style={{ padding: '4px 12px', borderRadius: 99, border: 'none', background: Y, color: WH, cursor: 'pointer', fontSize: 12, fontWeight: 600, fontFamily: 'inherit' }}>Salvează</button>
                 </div>
               </div>
             ) : (
               <div onClick={() => onUpdate({ _editing: true })} style={{
-                fontSize: 13, lineHeight: 1.8, color: step.notes ? BK : GR,
+                fontSize: 14, lineHeight: 1.8, color: step.notes ? BK : GR,
                 whiteSpace: 'pre-wrap', padding: '8px 10px', borderRadius: 8,
                 border: `1px solid ${BR}`, background: WH, cursor: 'text', minHeight: 44,
               }}>
@@ -171,8 +171,8 @@ function StepsTab({ steps, openId, setOpenId, onUpdate, onAdd, people }) {
     <div>
       <div style={{ marginBottom: 14 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
-          <span style={{ fontSize: 11, color: GR }}>{done}/{steps.length} categorii finalizate</span>
-          <span style={{ fontSize: 11, color: GR }}>{inProgress} în lucru · <span style={{ color: blocked > 0 ? '#C0392B' : GR }}>{blocked} blocate</span></span>
+          <span style={{ fontSize: 12, color: GR }}>{done}/{steps.length} categorii finalizate</span>
+          <span style={{ fontSize: 12, color: GR }}>{inProgress} în lucru · <span style={{ color: blocked > 0 ? '#C0392B' : GR }}>{blocked} blocate</span></span>
         </div>
         <div style={{ height: 4, background: BR, borderRadius: 2, overflow: 'hidden' }}>
           <div style={{ height: '100%', background: Y, width: `${(done / steps.length) * 100}%`, transition: 'width .4s', borderRadius: 2 }} />
@@ -192,12 +192,12 @@ function StepsTab({ steps, openId, setOpenId, onUpdate, onAdd, people }) {
             onKeyDown={e => e.key === 'Enter' && handleAdd()}
             placeholder="Subtitlu (opțional)..." style={{ ...inpS, marginBottom: 10, fontSize: 12 }} />
           <div style={{ display: 'flex', gap: 6, justifyContent: 'flex-end' }}>
-            <button onClick={() => { setAdding(false); setNewName(''); setNewSub(''); }} style={{ padding: '5px 14px', borderRadius: 99, border: `1px solid ${BR}`, background: WH, color: GR, cursor: 'pointer', fontSize: 11, fontFamily: 'inherit' }}>Anulează</button>
-            <button onClick={handleAdd} disabled={!newName.trim()} style={{ padding: '5px 14px', borderRadius: 99, border: 'none', background: newName.trim() ? Y : '#ccc', color: WH, cursor: newName.trim() ? 'pointer' : 'not-allowed', fontSize: 11, fontWeight: 600, fontFamily: 'inherit' }}>Adaugă</button>
+            <button onClick={() => { setAdding(false); setNewName(''); setNewSub(''); }} style={{ padding: '5px 14px', borderRadius: 99, border: `1px solid ${BR}`, background: WH, color: GR, cursor: 'pointer', fontSize: 12, fontFamily: 'inherit' }}>Anulează</button>
+            <button onClick={handleAdd} disabled={!newName.trim()} style={{ padding: '5px 14px', borderRadius: 99, border: 'none', background: newName.trim() ? Y : '#ccc', color: WH, cursor: newName.trim() ? 'pointer' : 'not-allowed', fontSize: 12, fontWeight: 600, fontFamily: 'inherit' }}>Adaugă</button>
           </div>
         </div>
       ) : (
-        <button onClick={() => setAdding(true)} style={{ width: '100%', marginTop: 6, padding: '8px 0', borderRadius: 10, border: `1px dashed #c4a8f0`, background: '#f9f5ff', color: Y, cursor: 'pointer', fontSize: 12, fontFamily: 'inherit', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5 }}>
+        <button onClick={() => setAdding(true)} style={{ width: '100%', marginTop: 6, padding: '8px 0', borderRadius: 10, border: `1px dashed #c4a8f0`, background: '#f9f5ff', color: Y, cursor: 'pointer', fontSize: 13, fontFamily: 'inherit', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5 }}>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           Adaugă categorie
         </button>
@@ -219,11 +219,11 @@ function TodoItem({ todo, steps, onToggle, onDelete }) {
         {todo.done && <svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" fill="none" stroke="white" strokeWidth="2.2" strokeLinecap="round" /></svg>}
       </button>
       <div style={{ flex: 1, minWidth: 0 }}>
-        <div style={{ fontSize: 13, color: todo.done ? GR : BK, textDecoration: todo.done ? 'line-through' : 'none', lineHeight: 1.3 }}>{todo.title}</div>
+        <div style={{ fontSize: 14, color: todo.done ? GR : BK, textDecoration: todo.done ? 'line-through' : 'none', lineHeight: 1.3 }}>{todo.title}</div>
         <div style={{ display: 'flex', gap: 5, marginTop: 4, flexWrap: 'wrap', alignItems: 'center' }}>
           {todo.assignee && <Tag>{todo.assignee}</Tag>}
           {step && <Tag yellow>{step.name}</Tag>}
-          {todo.dueDate && <span style={{ fontSize: 10, color: over ? '#C0392B' : GR }}>{over ? '⚠ ' : ''}{fmtDate(todo.dueDate)}</span>}
+          {todo.dueDate && <span style={{ fontSize: 11, color: over ? '#C0392B' : GR }}>{over ? '⚠ ' : ''}{fmtDate(todo.dueDate)}</span>}
         </div>
       </div>
       <button onClick={onDelete} style={{ border: 'none', background: 'none', cursor: 'pointer', color: '#CCC', fontSize: 16, lineHeight: 1, padding: '0 2px', marginTop: 1 }}>×</button>
@@ -278,7 +278,7 @@ function TodosTab({ todos, onAdd, onToggle, onDelete, steps, people }) {
         <div style={{ display: 'flex', gap: 4 }}>
           {[['open', `Deschise${openCount > 0 ? ` (${openCount})` : ''}`], ['all', 'Toate'], ['done', 'Completate']].map(([f, l]) => (
             <button key={f} onClick={() => setFilter(f)} style={{
-              padding: '4px 12px', borderRadius: 99, border: 'none', cursor: 'pointer', fontSize: 11,
+              padding: '4px 12px', borderRadius: 99, border: 'none', cursor: 'pointer', fontSize: 12,
               fontWeight: filter === f ? 600 : 400, background: filter === f ? BK : BG,
               color: filter === f ? WH : GR, fontFamily: 'inherit',
             }}>{l}</button>
@@ -291,20 +291,20 @@ function TodosTab({ todos, onAdd, onToggle, onDelete, steps, people }) {
         <button onClick={() => setCatFilter('')} style={{
           padding: '3px 10px', borderRadius: 99, border: `1px solid ${catFilter === '' ? Y : BR}`,
           background: catFilter === '' ? '#f9f5ff' : WH, color: catFilter === '' ? Y : GR,
-          cursor: 'pointer', fontSize: 11, fontWeight: catFilter === '' ? 600 : 400, fontFamily: 'inherit',
+          cursor: 'pointer', fontSize: 12, fontWeight: catFilter === '' ? 600 : 400, fontFamily: 'inherit',
         }}>Toate categoriile</button>
         {steps.filter(s => todos.some(t => t.stepId === s.id)).map(s => (
           <button key={s.id} onClick={() => setCatFilter(catFilter === s.id ? '' : s.id)} style={{
             padding: '3px 10px', borderRadius: 99, border: `1px solid ${catFilter === s.id ? Y : BR}`,
             background: catFilter === s.id ? '#f9f5ff' : WH, color: catFilter === s.id ? Y : GR,
-            cursor: 'pointer', fontSize: 11, fontWeight: catFilter === s.id ? 600 : 400, fontFamily: 'inherit',
+            cursor: 'pointer', fontSize: 12, fontWeight: catFilter === s.id ? 600 : 400, fontFamily: 'inherit',
           }}>{s.name}</button>
         ))}
       </div>
 
       {showForm && <TodoForm steps={steps} people={people} onSave={add} onCancel={() => setShowForm(false)} />}
       {shown.length === 0 && !showForm && (
-        <div style={{ textAlign: 'center', color: GR, fontSize: 13, padding: '48px 0' }}>
+        <div style={{ textAlign: 'center', color: GR, fontSize: 14, padding: '48px 0' }}>
           {catFilter ? 'Niciun to-do în această categorie.' : filter === 'open' ? 'Niciun to-do deschis.' : filter === 'done' ? 'Niciun task completat.' : 'Niciun task adăugat.'}
         </div>
       )}
@@ -325,12 +325,12 @@ function MinuteCard({ minute, steps, onDelete }) {
       <div onClick={() => setOpen(v => !v)} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 13px', cursor: 'pointer' }}>
         <div style={{ width: 38, textAlign: 'center', flexShrink: 0 }}>
           <div style={{ fontSize: 18, fontWeight: 700, lineHeight: 1 }}>{d.getDate()}</div>
-          <div style={{ fontSize: 9, color: GR, textTransform: 'uppercase' }}>{months[d.getMonth()]}</div>
+          <div style={{ fontSize: 10, color: GR, textTransform: 'uppercase' }}>{months[d.getMonth()]}</div>
         </div>
         <div style={{ width: 1, height: 32, background: BR, flexShrink: 0 }} />
         <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={{ fontWeight: 600, fontSize: 13, lineHeight: 1.1 }}>{minute.title}</div>
-          {minute.participants?.length > 0 && <div style={{ fontSize: 11, color: GR, marginTop: 2 }}>{minute.participants.join(', ')}</div>}
+          <div style={{ fontWeight: 600, fontSize: 14, lineHeight: 1.1 }}>{minute.title}</div>
+          {minute.participants?.length > 0 && <div style={{ fontSize: 12, color: GR, marginTop: 2 }}>{minute.participants.join(', ')}</div>}
         </div>
         <div style={{ display: 'flex', gap: 4, flexShrink: 0, flexWrap: 'wrap', justifyContent: 'flex-end', maxWidth: 180 }}>
           {rel.slice(0, 3).map(s => <Tag key={s.id}>{s.name}</Tag>)}
@@ -343,14 +343,14 @@ function MinuteCard({ minute, steps, onDelete }) {
       </div>
       {open && (
         <div style={{ borderTop: `1px solid ${BR}`, padding: '12px 14px', background: '#FAFAFA' }}>
-          {minute.notes && <div style={{ marginBottom: 10 }}><Lbl>Note</Lbl><div style={{ fontSize: 12, lineHeight: 1.7, whiteSpace: 'pre-wrap', color: BK }}>{minute.notes}</div></div>}
+          {minute.notes && <div style={{ marginBottom: 10 }}><Lbl>Note</Lbl><div style={{ fontSize: 13, lineHeight: 1.7, whiteSpace: 'pre-wrap', color: BK }}>{minute.notes}</div></div>}
           {decisions.length > 0 && (
             <div style={{ marginBottom: 10 }}>
               <Lbl>Decizii luate</Lbl>
               {decisions.map((dec, i) => (
                 <div key={i} style={{ display: 'flex', gap: 7, alignItems: 'flex-start', marginBottom: 4 }}>
                   <div style={{ width: 6, height: 6, borderRadius: '50%', background: G, marginTop: 5, flexShrink: 0 }} />
-                  <div style={{ fontSize: 12, lineHeight: 1.5, color: BK }}>{dec}</div>
+                  <div style={{ fontSize: 13, lineHeight: 1.5, color: BK }}>{dec}</div>
                 </div>
               ))}
             </div>
@@ -361,12 +361,12 @@ function MinuteCard({ minute, steps, onDelete }) {
               {actions.map((act, i) => (
                 <div key={i} style={{ display: 'flex', gap: 7, alignItems: 'flex-start', marginBottom: 4 }}>
                   <div style={{ width: 6, height: 6, borderRadius: 2, background: Y, marginTop: 5, flexShrink: 0 }} />
-                  <div style={{ fontSize: 12, lineHeight: 1.5, color: BK }}>{act}</div>
+                  <div style={{ fontSize: 13, lineHeight: 1.5, color: BK }}>{act}</div>
                 </div>
               ))}
             </div>
           )}
-          <button onClick={onDelete} style={{ fontSize: 11, color: '#C0392B', border: 'none', background: 'none', cursor: 'pointer', fontFamily: 'inherit', padding: 0 }}>Șterge minuta</button>
+          <button onClick={onDelete} style={{ fontSize: 12, color: '#C0392B', border: 'none', background: 'none', cursor: 'pointer', fontFamily: 'inherit', padding: 0 }}>Șterge minuta</button>
         </div>
       )}
     </div>
@@ -389,7 +389,7 @@ function MinuteForm({ steps, people, onSave, onCancel }) {
         <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap', marginTop: 4 }}>
           {people.map(p => (
             <button key={p} onClick={() => tog('participants', p)} style={{
-              padding: '3px 10px', borderRadius: 99, border: `1px solid ${BR}`, cursor: 'pointer', fontSize: 11,
+              padding: '3px 10px', borderRadius: 99, border: `1px solid ${BR}`, cursor: 'pointer', fontSize: 12,
               background: m.participants.includes(p) ? BK : WH, color: m.participants.includes(p) ? WH : GR, fontFamily: 'inherit',
             }}>{p}</button>
           ))}
@@ -400,7 +400,7 @@ function MinuteForm({ steps, people, onSave, onCancel }) {
         <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap', marginTop: 4 }}>
           {steps.map(s => (
             <button key={s.id} onClick={() => tog('stepIds', s.id)} style={{
-              padding: '3px 9px', borderRadius: 99, border: `1px solid ${BR}`, cursor: 'pointer', fontSize: 10,
+              padding: '3px 9px', borderRadius: 99, border: `1px solid ${BR}`, cursor: 'pointer', fontSize: 11,
               background: m.stepIds.includes(s.id) ? BK : WH, color: m.stepIds.includes(s.id) ? WH : GR, fontFamily: 'inherit',
             }}>{s.name}</button>
           ))}
@@ -426,12 +426,12 @@ function MinutesTab({ minutes, onAdd, onDelete, steps, people }) {
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-        <span style={{ fontSize: 12, color: GR }}>{minutes.length} {minutes.length === 1 ? 'ședință' : 'ședințe'} înregistrate</span>
+        <span style={{ fontSize: 13, color: GR }}>{minutes.length} {minutes.length === 1 ? 'ședință' : 'ședințe'} înregistrate</span>
         <Btn ghost={showForm} onClick={() => setShowForm(v => !v)}>{showForm ? 'Anulează' : '+ Minute'}</Btn>
       </div>
       {showForm && <MinuteForm steps={steps} people={people} onSave={add} onCancel={() => setShowForm(false)} />}
       {minutes.length === 0 && !showForm && (
-        <div style={{ textAlign: 'center', color: GR, fontSize: 13, padding: '48px 0' }}>Nicio ședință înregistrată.</div>
+        <div style={{ textAlign: 'center', color: GR, fontSize: 14, padding: '48px 0' }}>Nicio ședință înregistrată.</div>
       )}
       {minutes.map(m => <MinuteCard key={m.id} minute={m} steps={steps} onDelete={() => onDelete(m.id)} />)}
     </div>
@@ -450,7 +450,7 @@ function TeamPopover({ people, onAdd, onClose }) {
       {people.map((p, i) => (
         <div key={p} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '5px 0', borderBottom: `1px solid ${BG}` }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
-            <div style={{ width: 22, height: 22, borderRadius: '50%', background: BG, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, fontWeight: 600, color: GR }}>{p[0]}</div>
+            <div style={{ width: 22, height: 22, borderRadius: '50%', background: BG, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 600, color: GR }}>{p[0]}</div>
             <span style={{ fontSize: 12 }}>{p}</span>
           </div>
           {i >= PPL_DEF.length && <button onClick={() => setPeople(prev => prev.filter(x => x !== p))} style={{ border: 'none', background: 'none', cursor: 'pointer', color: '#CCC', fontSize: 14 }}>×</button>}
@@ -459,7 +459,7 @@ function TeamPopover({ people, onAdd, onClose }) {
       <div style={{ display: 'flex', gap: 6, marginTop: 10 }}>
         <input value={np} onChange={e => setNp(e.target.value)} onKeyDown={e => e.key === 'Enter' && add()}
           placeholder="Adaugă persoană..." style={{ ...inpS, flex: 1, height: 30, padding: '4px 8px', fontSize: 11 }} />
-        <button onClick={add} style={{ padding: '4px 10px', borderRadius: 6, border: 'none', background: BK, color: WH, cursor: 'pointer', fontSize: 12, fontFamily: 'inherit' }}>+</button>
+        <button onClick={add} style={{ padding: '4px 10px', borderRadius: 6, border: 'none', background: BK, color: WH, cursor: 'pointer', fontSize: 13, fontFamily: 'inherit' }}>+</button>
       </div>
     </div>
   );
@@ -582,13 +582,13 @@ export default function App() {
               <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
             </svg>
           </div>
-          <span style={{ fontWeight: 700, fontSize: 13, letterSpacing: '-.3px', color: 'white' }}>SOLT Hub</span>
+          <span style={{ fontWeight: 700, fontSize: 14, letterSpacing: '-.3px', color: 'white' }}>SOLT Hub</span>
         </div>
         <div style={{ width: 1, height: 18, background: 'rgba(255,255,255,0.2)' }} />
         <div style={{ display: 'flex', gap: 2 }}>
           {[['steps', 'Categorii'], ['todos', openCount > 0 ? `To-dos (${openCount})` : 'To-dos'], ['minutes', 'Minute']].map(([id, l]) => (
             <button key={id} onClick={() => setTab(id)} style={{
-              padding: '3px 11px', borderRadius: 99, border: 'none', cursor: 'pointer', fontSize: 11,
+              padding: '3px 11px', borderRadius: 99, border: 'none', cursor: 'pointer', fontSize: 12,
               fontWeight: tab === id ? 600 : 400,
               background: tab === id ? 'rgba(255,255,255,0.22)' : 'transparent',
               color: 'white', fontFamily: 'inherit', transition: 'all .1s',
@@ -597,7 +597,7 @@ export default function App() {
         </div>
         <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 8, position: 'relative' }}>
           {loaded && (
-            <span style={{ fontSize: 10, color: saved ? 'rgba(255,255,255,0.7)' : 'rgba(255,255,255,0.4)', display: 'flex', alignItems: 'center', gap: 3 }}>
+            <span style={{ fontSize: 11, color: saved ? 'rgba(255,255,255,0.7)' : 'rgba(255,255,255,0.4)', display: 'flex', alignItems: 'center', gap: 3 }}>
               {saved ? <><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="20 6 9 17 4 12" /></svg>salvat</> : 'salvare...'}
             </span>
           )}
@@ -605,7 +605,7 @@ export default function App() {
             display: 'flex', alignItems: 'center', gap: 4, padding: '3px 10px', borderRadius: 99,
             border: '1px solid rgba(255,255,255,0.25)',
             background: showTeam ? 'rgba(255,255,255,0.22)' : 'transparent',
-            color: 'white', cursor: 'pointer', fontSize: 11, fontFamily: 'inherit',
+            color: 'white', cursor: 'pointer', fontSize: 12, fontFamily: 'inherit',
           }}>
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
               <circle cx="9" cy="7" r="4" /><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" />
@@ -617,7 +617,7 @@ export default function App() {
         </div>
       </div>
       <div style={{ padding: 16, maxWidth: 740, margin: '0 auto' }}>
-        {error && <div style={{ marginBottom: 12, padding: '10px 14px', background: '#FEE8E8', border: '1px solid #F5C6C6', borderRadius: 8, fontSize: 12, color: '#C0392B' }}>⚠ {error}</div>}
+        {error && <div style={{ marginBottom: 12, padding: '10px 14px', background: '#FEE8E8', border: '1px solid #F5C6C6', borderRadius: 8, fontSize: 13, color: '#C0392B' }}>⚠ {error}</div>}
         {!loaded && <div style={{ textAlign: 'center', color: GR, padding: '60px 0', fontSize: 13 }}>Se încarcă...</div>}
         {loaded && tab === 'steps' && <StepsTab steps={steps} openId={openStep} setOpenId={setOpenStep} onUpdate={updStep} onAdd={addStep} people={people} />}
         {loaded && tab === 'todos' && <TodosTab todos={todos} onAdd={addTodo} onToggle={toggleTodo} onDelete={deleteTodo} steps={steps} people={people} />}
