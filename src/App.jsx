@@ -431,7 +431,7 @@ export default function App() {
           setError('Pașii nu au putut fi încărcați: ' + JSON.stringify(s));
           setSteps(STEPS_DEF.map(s => ({ ...s, notes: '', status: 'ns' })));
         }
-        if (Array.isArray(t)) setTodos(t);
+        if (Array.isArray(t)) setTodos(t.map(x => ({ ...x, stepId: x.step_id, dueDate: x.due_date })));
         if (Array.isArray(m)) setMinutes(m);
         if (Array.isArray(p) && p.length) setPeople(p.map(x => x.name));
       } catch (e) {
@@ -454,8 +454,15 @@ export default function App() {
 
   // Todo operations
   const addTodo = async (t) => {
-    const todo = { ...t, id: uid(), done: false, created_at: new Date().toISOString(), updated_at: new Date().toISOString() };
-    setTodos(p => [todo, ...p]);
+    const todo = {
+      id: uid(), done: false,
+      title: t.title, assignee: t.assignee,
+      step_id: t.stepId || null,
+      due_date: t.dueDate || null,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString()
+    };
+    setTodos(p => [{ ...todo, stepId: t.stepId, dueDate: t.dueDate }, ...p]);
     await sbUpsert('hub_todos', todo);
   };
   const toggleTodo = async (id) => {
