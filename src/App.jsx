@@ -438,7 +438,7 @@ export default function App() {
           setSteps(STEPS_DEF.map(s => ({ ...s, notes: '', status: 'ns' })));
         }
         if (Array.isArray(t)) setTodos(t.map(x => ({ ...x, stepId: x.step_id, dueDate: x.due_date })));
-        if (Array.isArray(m)) setMinutes(m);
+        if (Array.isArray(m)) setMinutes(m.map(x => ({ ...x, stepIds: x.step_ids || [] })));
         if (Array.isArray(p) && p.length) setPeople(p.map(x => x.name));
       } catch (e) {
         setError('Eroare conexiune: ' + e.message);
@@ -485,8 +485,14 @@ export default function App() {
 
   // Minute operations
   const addMinute = async (m) => {
-    const minute = { ...m, id: uid(), created_at: new Date().toISOString() };
-    setMinutes(p => [minute, ...p]);
+    const minute = {
+      ...m,
+      id: uid(),
+      step_ids: m.stepIds || [],
+      created_at: new Date().toISOString()
+    };
+    delete minute.stepIds;
+    setMinutes(p => [{ ...minute, stepIds: m.stepIds || [] }, ...p]);
     await sbUpsert('hub_minutes', minute);
   };
   const deleteMinute = async (id) => {
