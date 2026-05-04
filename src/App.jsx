@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-const Y = '#feda00', G = '#2ecc88', BK = '#161616', GR = '#5C5C5C';
+const Y = '#5e35b1', G = '#2ecc88', BK = '#161616', GR = '#5C5C5C';
 const BG = '#F7F7F7', BR = '#E4E4E4', WH = '#ffffff';
 
 const STEPS_DEF = [
@@ -92,7 +92,7 @@ function StepRow({ step, idx, open, onToggle, onUpdate }) {
   return (
     <div style={{ border: `1px solid ${open ? BK : BR}`, borderRadius: 10, overflow: 'hidden', marginBottom: 5, background: WH, transition: 'border-color .15s' }}>
       <div onClick={onToggle} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '9px 13px', cursor: 'pointer', userSelect: 'none' }}>
-        <div style={{ width: 22, height: 22, borderRadius: 6, background: open ? BK : BG, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, transition: 'background .15s' }}>
+        <div style={{ width: 22, height: 22, borderRadius: 6, background: open ? Y : BG, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, transition: 'background .15s' }}>
           <span style={{ fontSize: 10, fontWeight: 700, color: open ? WH : GR }}>{idx + 1}</span>
         </div>
         <div style={{ flex: 1, minWidth: 0 }}>
@@ -170,7 +170,7 @@ function StepsTab({ steps, openId, setOpenId, onUpdate, onAdd, people }) {
           <span style={{ fontSize: 11, color: GR }}>{inProgress} în lucru · <span style={{ color: blocked > 0 ? '#C0392B' : GR }}>{blocked} blocate</span></span>
         </div>
         <div style={{ height: 4, background: BR, borderRadius: 2, overflow: 'hidden' }}>
-          <div style={{ height: '100%', background: G, width: `${(done / steps.length) * 100}%`, transition: 'width .4s', borderRadius: 2 }} />
+          <div style={{ height: '100%', background: Y, width: `${(done / steps.length) * 100}%`, transition: 'width .4s', borderRadius: 2 }} />
         </div>
       </div>
       {steps.map((s, i) => (
@@ -188,11 +188,11 @@ function StepsTab({ steps, openId, setOpenId, onUpdate, onAdd, people }) {
             placeholder="Subtitlu (opțional)..." style={{ ...inpS, marginBottom: 10, fontSize: 12 }} />
           <div style={{ display: 'flex', gap: 6, justifyContent: 'flex-end' }}>
             <button onClick={() => { setAdding(false); setNewName(''); setNewSub(''); }} style={{ padding: '5px 14px', borderRadius: 99, border: `1px solid ${BR}`, background: WH, color: GR, cursor: 'pointer', fontSize: 11, fontFamily: 'inherit' }}>Anulează</button>
-            <button onClick={handleAdd} disabled={!newName.trim()} style={{ padding: '5px 14px', borderRadius: 99, border: 'none', background: newName.trim() ? BK : '#ccc', color: WH, cursor: newName.trim() ? 'pointer' : 'not-allowed', fontSize: 11, fontWeight: 600, fontFamily: 'inherit' }}>Adaugă</button>
+            <button onClick={handleAdd} disabled={!newName.trim()} style={{ padding: '5px 14px', borderRadius: 99, border: 'none', background: newName.trim() ? Y : '#ccc', color: WH, cursor: newName.trim() ? 'pointer' : 'not-allowed', fontSize: 11, fontWeight: 600, fontFamily: 'inherit' }}>Adaugă</button>
           </div>
         </div>
       ) : (
-        <button onClick={() => setAdding(true)} style={{ width: '100%', marginTop: 6, padding: '8px 0', borderRadius: 10, border: `1px dashed ${BR}`, background: 'transparent', color: GR, cursor: 'pointer', fontSize: 12, fontFamily: 'inherit', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5 }}>
+        <button onClick={() => setAdding(true)} style={{ width: '100%', marginTop: 6, padding: '8px 0', borderRadius: 10, border: `1px dashed #c4a8f0`, background: '#f9f5ff', color: Y, cursor: 'pointer', fontSize: 12, fontFamily: 'inherit', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5 }}>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           Adaugă categorie
         </button>
@@ -549,35 +549,37 @@ export default function App() {
 
   return (
     <div style={{ fontFamily: "'Inter', system-ui, sans-serif", background: WH, color: BK, minHeight: '100vh', position: 'relative' }}>
-      <div style={{ position: 'sticky', top: 0, zIndex: 100, background: WH, borderBottom: `1px solid ${BR}`, padding: '0 16px', display: 'flex', alignItems: 'center', gap: 10, height: 46 }}>
+      <div style={{ position: 'sticky', top: 0, zIndex: 100, background: '#5e35b1', borderBottom: `1px solid #4a2899`, padding: '0 16px', display: 'flex', alignItems: 'center', gap: 10, height: 46 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
-          <div style={{ background: Y, width: 24, height: 24, borderRadius: 6, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke={BK} strokeWidth="2.5" strokeLinecap="round">
+          <div style={{ background: 'rgba(255,255,255,0.15)', width: 24, height: 24, borderRadius: 6, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round">
               <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
             </svg>
           </div>
-          <span style={{ fontWeight: 700, fontSize: 13, letterSpacing: '-.3px' }}>SOLT Hub</span>
+          <span style={{ fontWeight: 700, fontSize: 13, letterSpacing: '-.3px', color: 'white' }}>SOLT Hub</span>
         </div>
-        <div style={{ width: 1, height: 18, background: BR }} />
+        <div style={{ width: 1, height: 18, background: 'rgba(255,255,255,0.2)' }} />
         <div style={{ display: 'flex', gap: 2 }}>
           {[['steps', 'Categorii'], ['todos', openCount > 0 ? `To-dos (${openCount})` : 'To-dos'], ['minutes', 'Minute']].map(([id, l]) => (
             <button key={id} onClick={() => setTab(id)} style={{
               padding: '3px 11px', borderRadius: 99, border: 'none', cursor: 'pointer', fontSize: 11,
-              fontWeight: tab === id ? 600 : 400, background: tab === id ? BK : WH,
-              color: tab === id ? WH : GR, fontFamily: 'inherit', transition: 'all .1s',
+              fontWeight: tab === id ? 600 : 400,
+              background: tab === id ? 'rgba(255,255,255,0.22)' : 'transparent',
+              color: 'white', fontFamily: 'inherit', transition: 'all .1s',
             }}>{l}</button>
           ))}
         </div>
         <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 8, position: 'relative' }}>
           {loaded && (
-            <span style={{ fontSize: 10, color: saved ? '#0A6640' : GR, display: 'flex', alignItems: 'center', gap: 3 }}>
+            <span style={{ fontSize: 10, color: saved ? 'rgba(255,255,255,0.7)' : 'rgba(255,255,255,0.4)', display: 'flex', alignItems: 'center', gap: 3 }}>
               {saved ? <><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="20 6 9 17 4 12" /></svg>salvat</> : 'salvare...'}
             </span>
           )}
           <button onClick={() => setShowTeam(v => !v)} style={{
             display: 'flex', alignItems: 'center', gap: 4, padding: '3px 10px', borderRadius: 99,
-            border: `1px solid ${BR}`, background: showTeam ? BK : WH, color: showTeam ? WH : GR,
-            cursor: 'pointer', fontSize: 11, fontFamily: 'inherit',
+            border: '1px solid rgba(255,255,255,0.25)',
+            background: showTeam ? 'rgba(255,255,255,0.22)' : 'transparent',
+            color: 'white', cursor: 'pointer', fontSize: 11, fontFamily: 'inherit',
           }}>
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
               <circle cx="9" cy="7" r="4" /><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" />
