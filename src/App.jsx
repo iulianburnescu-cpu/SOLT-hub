@@ -3,14 +3,14 @@ import { useState, useEffect, useRef } from "react";
 const P    = '#7c5cbf';
 const PD   = '#5e35b1';
 const G    = '#2ecc88';
-const BG   = '#0a0a0f';
-const S1   = '#13131f';
-const S2   = '#1c1c2e';
-const BD   = '#262640';
+const BG   = '#F7F7F7';
+const S1   = '#ffffff';
+const S2   = '#F7F7F7';
+const BD   = '#E4E4E4';
 const BDA  = '#5e35b1';
-const TX   = '#e8e8f2';
-const TX2  = '#7878a8';
-const TX3  = '#3a3a58';
+const TX   = '#161616';
+const TX2  = '#5C5C5C';
+const TX3  = '#AAAAAA';
 const RD   = '#e74c3c';
 const YL   = '#f0c000';
 
@@ -213,7 +213,7 @@ function TodoForm({ steps, people, onSave, onCancel }) {
         </select>
       </div>
       <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-        <input type="date" value={t.dueDate} onChange={e => setT(p => ({ ...p, dueDate: e.target.value }))} style={{ ...inpS, maxWidth: 160, height: 36, padding: '6px 10px', colorScheme: 'dark' }} />
+        <input type="date" value={t.dueDate} onChange={e => setT(p => ({ ...p, dueDate: e.target.value }))} style={{ ...inpS, maxWidth: 160, height: 36, padding: '6px 10px', colorScheme: 'light' }} />
         <div style={{ marginLeft: 'auto', display: 'flex', gap: 6 }}>
           <Btn ghost onClick={onCancel}>Anulează</Btn>
           <Btn onClick={() => t.title.trim() && onSave(t)} disabled={!t.title.trim()}>Adaugă</Btn>
@@ -325,7 +325,7 @@ function MinuteForm({ steps, people, onSave, onCancel }) {
     <div style={{ border: `1px solid ${BDA}`, borderRadius: 10, padding: 16, marginBottom: 12, background: S2, boxShadow: '0 0 0 1px rgba(94,53,177,.15)' }}>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 8, marginBottom: 12 }}>
         <input value={m.title} onChange={e => setM(p => ({ ...p, title: e.target.value }))} placeholder="Titlu ședință..." style={{ ...inpS, fontSize: 15 }} autoFocus />
-        <input type="date" value={m.date} onChange={e => setM(p => ({ ...p, date: e.target.value }))} style={{ ...inpS, width: 150, colorScheme: 'dark' }} />
+        <input type="date" value={m.date} onChange={e => setM(p => ({ ...p, date: e.target.value }))} style={{ ...inpS, width: 150, colorScheme: 'light' }} />
       </div>
       <div style={{ marginBottom: 12 }}>
         <Lbl>Participanți</Lbl>
