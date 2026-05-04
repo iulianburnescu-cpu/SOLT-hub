@@ -41,6 +41,7 @@ async function sbPatch(table, id, data) {
     body: JSON.stringify(data),
   });
 }
+async function sbDelete(table, id) {
   await fetch(`${SB_URL}/rest/v1/${table}?id=eq.${id}`, { method: 'DELETE', headers: sbH });
 }
 
