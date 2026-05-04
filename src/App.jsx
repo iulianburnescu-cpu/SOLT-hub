@@ -264,12 +264,17 @@ function TodoForm({ steps, people, onSave, onCancel }) {
 function TodosTab({ todos, onAdd, onToggle, onDelete, steps, people }) {
   const [showForm, setShowForm] = useState(false);
   const [filter, setFilter] = useState('open');
+  const [catFilter, setCatFilter] = useState('');
   const add = t => { onAdd(t); setShowForm(false); };
   const openCount = todos.filter(t => !t.done).length;
-  const shown = filter === 'all' ? todos : filter === 'open' ? todos.filter(t => !t.done) : todos.filter(t => t.done);
+
+  const shown = todos
+    .filter(t => filter === 'all' ? true : filter === 'open' ? !t.done : t.done)
+    .filter(t => catFilter === '' ? true : t.stepId === catFilter);
+
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
         <div style={{ display: 'flex', gap: 4 }}>
           {[['open', `Deschise${openCount > 0 ? ` (${openCount})` : ''}`], ['all', 'Toate'], ['done', 'Completate']].map(([f, l]) => (
             <button key={f} onClick={() => setFilter(f)} style={{
@@ -281,10 +286,26 @@ function TodosTab({ todos, onAdd, onToggle, onDelete, steps, people }) {
         </div>
         <Btn ghost={showForm} onClick={() => setShowForm(v => !v)}>{showForm ? 'Anulează' : '+ To-do'}</Btn>
       </div>
+
+      <div style={{ display: 'flex', gap: 6, marginBottom: 12, flexWrap: 'wrap' }}>
+        <button onClick={() => setCatFilter('')} style={{
+          padding: '3px 10px', borderRadius: 99, border: `1px solid ${catFilter === '' ? Y : BR}`,
+          background: catFilter === '' ? '#f9f5ff' : WH, color: catFilter === '' ? Y : GR,
+          cursor: 'pointer', fontSize: 11, fontWeight: catFilter === '' ? 600 : 400, fontFamily: 'inherit',
+        }}>Toate categoriile</button>
+        {steps.filter(s => todos.some(t => t.stepId === s.id)).map(s => (
+          <button key={s.id} onClick={() => setCatFilter(catFilter === s.id ? '' : s.id)} style={{
+            padding: '3px 10px', borderRadius: 99, border: `1px solid ${catFilter === s.id ? Y : BR}`,
+            background: catFilter === s.id ? '#f9f5ff' : WH, color: catFilter === s.id ? Y : GR,
+            cursor: 'pointer', fontSize: 11, fontWeight: catFilter === s.id ? 600 : 400, fontFamily: 'inherit',
+          }}>{s.name}</button>
+        ))}
+      </div>
+
       {showForm && <TodoForm steps={steps} people={people} onSave={add} onCancel={() => setShowForm(false)} />}
       {shown.length === 0 && !showForm && (
         <div style={{ textAlign: 'center', color: GR, fontSize: 13, padding: '48px 0' }}>
-          {filter === 'open' ? 'Niciun to-do deschis.' : filter === 'done' ? 'Niciun task completat.' : 'Niciun task adăugat.'}
+          {catFilter ? 'Niciun to-do în această categorie.' : filter === 'open' ? 'Niciun to-do deschis.' : filter === 'done' ? 'Niciun task completat.' : 'Niciun task adăugat.'}
         </div>
       )}
       {shown.map(t => <TodoItem key={t.id} todo={t} steps={steps} onToggle={() => onToggle(t.id)} onDelete={() => onDelete(t.id)} />)}
